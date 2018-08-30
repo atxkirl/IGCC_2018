@@ -13,9 +13,10 @@ public class AudioAnalyzer : MonoBehaviour
     private int sampleRate;
     private float clipLength;
     private float[] multiChannelSamples;
-    public SpectrumAnalyzer spectrumAnalyzer;
+
     public AudioSource unmutedAudioSource;
     public AudioSource mutedAudioSource;
+    public SpectrumAnalyzer spectrumAnalyzer;
 
     //TESTING VARIABLES
     public List<SpectralFluxInfo> peakInfo;
@@ -24,9 +25,6 @@ public class AudioAnalyzer : MonoBehaviour
     {
         //Make sure both audio sources are using the same audio clip
         mutedAudioSource.clip = unmutedAudioSource.clip;
-
-        //Initialize SpectrumAnalyzer
-        spectrumAnalyzer = new SpectrumAnalyzer();
 
         //Initalize all TESTING variables
         peakInfo = new List<SpectralFluxInfo>();

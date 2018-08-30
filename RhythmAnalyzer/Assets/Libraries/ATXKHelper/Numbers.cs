@@ -1,4 +1,4 @@
-﻿public class Numbers : Singleton<Numbers>
+﻿public class Numbers : SingletonMonoBehaviour<Numbers>
 {
     public bool CheckBetweenValues(int _amountToCheck, int _min, int _max)
     {

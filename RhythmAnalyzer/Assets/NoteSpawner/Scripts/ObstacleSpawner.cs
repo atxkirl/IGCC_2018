@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EZObjectPools;
 
-public class ObstacleSpawner : Singleton<ObstacleSpawner>
+public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
 {
     public GameObject objectToSpawn;
     public GameObject audioController;
@@ -12,6 +12,7 @@ public class ObstacleSpawner : Singleton<ObstacleSpawner>
 
     private AudioSource mutedSource;
     private AudioSource unmutedSource;
+    private SpectrumAnalyzer spectrumAnalyzer;
     private EZObjectPool objectPool;
 
     private void Start()
@@ -21,6 +22,8 @@ public class ObstacleSpawner : Singleton<ObstacleSpawner>
         //Get audio sources from AudioController in scene
         mutedSource = audioController.GetComponent<AudioAnalyzer>().mutedAudioSource;
         unmutedSource = audioController.GetComponent<AudioAnalyzer>().unmutedAudioSource;
+        //Get spectrum analyzer from AudioController
+        spectrumAnalyzer = audioController.GetComponent<AudioAnalyzer>().spectrumAnalyzer;
 
         //Calculate distance between player and spawner to calculate offset
         float distance = Vector3.Distance(transform.position, playerPosition.transform.position);
@@ -42,7 +45,7 @@ public class ObstacleSpawner : Singleton<ObstacleSpawner>
         {
             //Real-time checking through the entire processed list of samples
             int index = audioController.GetComponent<AudioAnalyzer>().GetIndex(mutedSource.time) / 1024;
-            if (audioController.GetComponent<AudioAnalyzer>().spectrumAnalyzer.spectralFluxSamples[index].isPeak)
+            if (spectrumAnalyzer.spectralFluxSamples[index].isPeak)
             {
                 SpawnObstacle();
             }

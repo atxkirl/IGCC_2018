@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Abstract class for creating Singleton classes. Usage: Replace 'T' with the class name.
+/// Abstract class for creating Singleton classes with Monobehaviour. Usage: Replace 'T' with the class name.
 /// </summary>
-public abstract class Singleton<T> : MonoBehaviour where T : Component
+public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : Component
 {
     private static T _instance;
 

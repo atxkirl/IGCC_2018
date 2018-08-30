@@ -15,7 +15,7 @@ public class SpectralFluxInfo
     public bool isPeak;
 }
 
-public class SpectrumAnalyzer
+public class SpectrumAnalyzer : MonoBehaviour
 {
     //Number of samples
     public int numSamples = 1024;
@@ -53,26 +53,6 @@ public class SpectrumAnalyzer
 
     //GETTERS
     public float[] GetCurrSpectrum() { return currSpectrum; }
-    /// <summary>
-    /// Returns the average spectral flux within a range multiplied by the threshold multiplier (Default: 1.5x).
-    /// </summary>
-    private float GetFluxThreshold(int index)
-    {
-        //Create range to sample to calculate the average
-        int startIndex = (int)Mathf.Max(0, index - thresholdSamplesNeeded * 0.5f);
-        int endIndex = (int)Mathf.Min(spectralFluxSamples.Count - 1, index + thresholdSamplesNeeded * 0.5f);
-
-        //Get the sum of all the spectral flux within the range
-        float sum = 0f;
-        for(int i = startIndex; i < endIndex; ++i)
-        {
-            sum += spectralFluxSamples[i].spectralFlux;
-        }
-
-        //Calculate average and multiply it against the threshold sensitivity
-        float average = sum / (endIndex - startIndex);
-        return average * thresholdMultiplier;
-    }
 
     //SETTERS
     public void SetCurrSpectrum(float[] _currSpectrum)
@@ -137,6 +117,27 @@ public class SpectrumAnalyzer
             spectralFluxSamples[endIndex].time - spectralFluxSamples[startIndex].time,
             endIndex - startIndex
         ));
+    }
+
+    /// <summary>
+    /// Returns the average spectral flux within a range multiplied by the threshold multiplier (Default: 1.5x).
+    /// </summary>
+    private float GetFluxThreshold(int index)
+    {
+        //Create range to sample to calculate the average
+        int startIndex = (int)Mathf.Max(0, index - thresholdSamplesNeeded * 0.5f);
+        int endIndex = (int)Mathf.Min(spectralFluxSamples.Count - 1, index + thresholdSamplesNeeded * 0.5f);
+
+        //Get the sum of all the spectral flux within the range
+        float sum = 0f;
+        for (int i = startIndex; i < endIndex; ++i)
+        {
+            sum += spectralFluxSamples[i].spectralFlux;
+        }
+
+        //Calculate average and multiply it against the threshold sensitivity
+        float average = sum / (endIndex - startIndex);
+        return average * thresholdMultiplier;
     }
 
     //PUBLIC FUNCTIONS
