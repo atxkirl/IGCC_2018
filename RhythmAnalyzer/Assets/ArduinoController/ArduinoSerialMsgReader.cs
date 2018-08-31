@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArduinoSerialMsgReader : MonoBehaviour
+public class ArduinoSerialMsgReader : Singleton<ArduinoSerialMsgReader>
 {
     public delegate void OnAccelerometerMsgRecieved(string[] msg);
-    public event OnAccelerometerMsgRecieved onAccelerometerMsgRecieved = delegate { };
+    public event OnAccelerometerMsgRecieved onAccelerometerMsgRecieved = delegate { }; 
+    public bool tapped;
 
     void OnMessageArrived(string msg)
     {
         string[] msgArray = msg.Split('_');
         onAccelerometerMsgRecieved.Invoke(msgArray);
-        for (int i = 0; i < 2; i++)
+        int check = int.Parse(msgArray[msgArray.Length - 1]);
+
+        if (check == 1)
         {
-            print(msgArray[i]);
+            tapped = true;
+        }
+        else
+        {
+            tapped = false;
         }
     }
 
