@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArduinoSerialMsgReader : Singleton<ArduinoSerialMsgReader>
+public class ArduinoSerialMsgReader : SingletonMonoBehaviour<ArduinoSerialMsgReader>
 {
     public delegate void OnAccelerometerMsgRecieved(string[] msg);
     public event OnAccelerometerMsgRecieved onAccelerometerMsgRecieved = delegate { }; 
