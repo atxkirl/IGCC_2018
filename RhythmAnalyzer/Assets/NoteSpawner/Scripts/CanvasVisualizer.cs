@@ -36,24 +36,24 @@ public class CanvasVisualizer : MonoBehaviour
         if(audioController.GetComponent<AudioSource>().isPlaying)
         {
             //Real-time checking through the entire processed list of samples
-            int index = audioController.GetComponent<AudioAnalyzer>().GetIndex(audioController.GetComponent<AudioSource>().time) / 1024;
-            if (audioController.GetComponent<AudioAnalyzer>().spectrumAnalyzer.spectralFluxSamples[index].isPeak)
-            {
-                int spawnIndex = Random.Range(0, spawnPoints.Count);
-                GameObject obj = Instantiate(note, spawnPoints[spawnIndex]);
-                Destroy(obj, 0.5f);
-            }
+            //int index = audioController.GetComponent<AudioAnalyzer>().GetIndex(audioController.GetComponent<AudioSource>().time) / 1024;
+            //if (audioController.GetComponent<AudioAnalyzer>().spectrumAnalyzer.spectralFluxSamples[index].isPeak)
+            //{
+            //    int spawnIndex = Random.Range(0, spawnPoints.Count);
+            //    GameObject obj = Instantiate(note, spawnPoints[spawnIndex]);
+            //    Destroy(obj, 0.5f);
+            //}
 
             //Real-time checking through the list of peak samples
-            //foreach (SpectralFluxInfo sf in audioController.GetComponent<AudioAnalyzer>().peakInfo)
-            //{
-            //    if (sf.time <= audioController.GetComponent<AudioSource>().time + 0.0167f && sf.time >= audioController.GetComponent<AudioSource>().time - 0.0167f)
-            //    {
-            //        int spawnIndex = Random.Range(0, spawnPoints.Count);
-            //        GameObject obj = Instantiate(note, spawnPoints[spawnIndex]);
-            //        Destroy(obj, 0.5f);
-            //    }
-            //}
+            foreach (SpectralFluxInfo sf in audioController.GetComponent<AudioAnalyzer>().peakInfo)
+            {
+                if (sf.time <= audioController.GetComponent<AudioSource>().time + 0.0167f && sf.time >= audioController.GetComponent<AudioSource>().time - 0.0167f)
+                {
+                    int spawnIndex = Random.Range(0, spawnPoints.Count);
+                    GameObject obj = Instantiate(note, spawnPoints[spawnIndex]);
+                    Destroy(obj, 0.5f);
+                }
+            }
         }
     }
 }

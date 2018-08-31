@@ -13,32 +13,31 @@ public class AudioAnalyzer : MonoBehaviour
     private int sampleRate;
     private float clipLength;
     private float[] multiChannelSamples;
+
+    public AudioSource unmutedAudioSource;
+    public AudioSource mutedAudioSource;
     public SpectrumAnalyzer spectrumAnalyzer;
-    public AudioSource audioSource;
 
     //TESTING VARIABLES
     public List<SpectralFluxInfo> peakInfo;
 
     private void Start()
     {
-        //Get the AudioSource component
-        audioSource = GetComponent<AudioSource>();
-
-        //Initialize SpectrumAnalyzer
-        spectrumAnalyzer = new SpectrumAnalyzer();
+        //Make sure both audio sources are using the same audio clip
+        mutedAudioSource.clip = unmutedAudioSource.clip;
 
         //Initalize all TESTING variables
         peakInfo = new List<SpectralFluxInfo>();
 
         //Initialize data from AudioSource component
-        numberOfChannels = audioSource.clip.channels;
-        totalNumberOfSamples = audioSource.clip.samples;
-        clipLength = audioSource.clip.length;
-        sampleRate = audioSource.clip.frequency;
+        numberOfChannels = unmutedAudioSource.clip.channels;
+        totalNumberOfSamples = unmutedAudioSource.clip.samples;
+        clipLength = unmutedAudioSource.clip.length;
+        sampleRate = unmutedAudioSource.clip.frequency;
 
         //Get spectral data from AudioSource component
-        multiChannelSamples = new float[audioSource.clip.samples * audioSource.clip.channels];
-        audioSource.clip.GetData(multiChannelSamples, 0);
+        multiChannelSamples = new float[unmutedAudioSource.clip.samples * unmutedAudioSource.clip.channels];
+        unmutedAudioSource.clip.GetData(multiChannelSamples, 0);
 
         //Create a thread to get all of the spectrum data
         Thread spectrumThread = new Thread(AnalyzeFullSpectrum);
@@ -125,7 +124,7 @@ public class AudioAnalyzer : MonoBehaviour
             }
 
             Debug.Log("Spectrum Analysis completed, now getting all Peak data samples.");
-            for (float i = 0f; i < clipLength; i += 0.01f)
+            for (float i = 0f; i <= clipLength; i += 0.0167f)
             {
                 //Get the index from the audio time
                 int index = GetIndex(i) / spectrumAnalyzer.numSamples;
@@ -135,18 +134,9 @@ public class AudioAnalyzer : MonoBehaviour
                 {
                     SpectralFluxInfo info = spectrumAnalyzer.spectralFluxSamples[index];
 
-                    //Make sure sample is a peak and we don't have duplicates
-                    if (info.isPeak && !peakInfo.Contains(info))
+                    //Make sure sample is a peak
+                    if (info.isPeak)
                     {
-                        foreach (SpectralFluxInfo sf in peakInfo)
-                        {
-                            //Make sure we don't have overlapping samples 
-                            if (sf.time == info.time)
-                            {
-                                return;
-                            }
-                        }
-
                         peakInfo.Add(info);
                     }
                 }
