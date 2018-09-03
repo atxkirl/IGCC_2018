@@ -245,7 +245,7 @@ namespace EZObjectPools
         GameObject NewActiveObject()
         {
             GameObject g = (GameObject)Instantiate(Template);
-            g.transform.parent = transform;
+            g.transform.SetParent(transform);
 
             PooledObject p = g.GetComponent<PooledObject>();
 

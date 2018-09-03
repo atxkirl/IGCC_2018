@@ -177,7 +177,7 @@ public class SpectrumAnalyzer : MonoBehaviour
         }
         else
         {
-            Debug.Log(string.Format("Not enough samples to detect peaks. Current spectral flux sample size of {0} growing to {1}", spectralFluxSamples.Count, thresholdSamplesNeeded));
+            //Debug.Log(string.Format("Not enough samples to detect peaks. Current spectral flux sample size of {0} growing to {1}", spectralFluxSamples.Count, thresholdSamplesNeeded));
         }
     }
 }
