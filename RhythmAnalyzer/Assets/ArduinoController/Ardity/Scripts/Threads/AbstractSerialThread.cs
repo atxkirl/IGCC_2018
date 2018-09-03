@@ -258,6 +258,10 @@ public abstract class AbstractSerialThread
                     Debug.LogWarning("Queue is full. Dropping message: " + inputMessage);
                 }
             }
+            else
+            {
+                Debug.Log("pls helpu me");
+            }
         }
         catch (TimeoutException)
         {
