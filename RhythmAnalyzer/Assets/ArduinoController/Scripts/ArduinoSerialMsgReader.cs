@@ -10,6 +10,7 @@ public class ArduinoSerialMsgReader : SingletonMonoBehaviour<ArduinoSerialMsgRea
 
     void OnMessageArrived(string msg)
     {
+        Debug.Log("test1");
         string[] msgArray = msg.Split('_');
         onAccelerometerMsgRecieved.Invoke(msgArray);
         int check = int.Parse(msgArray[msgArray.Length - 1]);
