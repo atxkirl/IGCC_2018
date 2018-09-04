@@ -162,6 +162,21 @@ public abstract class AudioImporter : MonoBehaviour
         progress = 0;
     }
 
+    public void ClearAudio()
+    {
+        StopAllCoroutines();
+
+        if (audioClip != null)
+            Destroy(audioClip);
+
+        url = null;
+        audioClip = null;
+        isLoaded = false;
+        isError = false;
+        error = null;
+        progress = 0;
+    }
+
     protected void OnLoaded(AudioClip audioClip)
     {
         audioClip.name = GetName();

@@ -17,5 +17,13 @@ public class MenuButton : UIButtonBase, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         menu.SetActive(!menu.activeSelf);
+
+        //Stops audio player
+        if(!menu.activeInHierarchy)
+        {
+            MusicPreview.Instance.audioSource.Stop();
+            MusicPreview.Instance.audioSource.clip = null;
+            MusicPreview.Instance.playImmediate = false;
+        }
     }
 }
