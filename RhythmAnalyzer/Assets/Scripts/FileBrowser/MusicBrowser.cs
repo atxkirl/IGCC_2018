@@ -5,27 +5,31 @@ using GracesGames.SimpleFileBrowser.Scripts;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Linq;
 
 public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
 {
-    /// <summary>
-    /// Occurs when a file has been selected in the browser.
-    /// </summary>
-    public event Action<string> FileSelected;
-
     private AudioImporter importer;
     private AudioSource audioSource;
 
     //File browser prefab
-    public GameObject FileBrowserPrefab;
+    public GameObject fileBrowserPrefab;
     //Orientation
     public ViewMode orientation = ViewMode.Landscape;
 
     //List of allowed file extension
-    public string[] FileExtensions;
+    public string[] fileExtensions;
+    //Final List of all known URLs
+    public string[] fileURLs;
+    //List of default URLs
+    public string[] defaultURLs;
+    //List of imported audio clips
+    public List<AudioClip> importedAudio;
 
     //String to hold values
     private string textToWrite;
+    //PlayerPref key (DO NOT CHANGE)
+    private string playerPrefKey = "MusicList";
 
     private void Start()
     {
@@ -38,8 +42,46 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
         importer = GetComponent<AudioImporter>();
         audioSource = GetComponent<AudioSource>();
 
-        importer.Loaded += OnLoaded;
-        FileSelected += OnFileSelected;
+        //Default URLs
+        if (defaultURLs.Length > 0)
+        {
+            //Check PlayerPrefs to see if list already has been created
+            if (PlayerPrefs.HasKey(playerPrefKey))
+            {
+                string[] existingURLs = PlayerPrefExtension.Instance.GetStringArray(playerPrefKey);
+                List<string> newURLs = existingURLs.ToList();
+
+                //Add all new unique URLs to the list
+                foreach (string url in defaultURLs)
+                {
+                    if (!existingURLs.Contains(url))
+                    {
+                        newURLs.Add(url);
+                    }
+                }
+
+                //Update PlayerPrefs
+                PlayerPrefExtension.Instance.SetStringArray(playerPrefKey, newURLs.ToArray());
+            }
+            else
+            {
+                //PlayerPrefs does not contain any file URLs, so we create a new PlayerPref list
+                PlayerPrefExtension.Instance.SetStringArray(playerPrefKey, defaultURLs);
+            }
+        }
+
+        //Get list of file URLs
+        fileURLs = PlayerPrefExtension.Instance.GetStringArray(playerPrefKey);
+    }
+
+    private void Update()
+    {
+        //WARNING: THIS REMOVES PLAYERPREFS DATA ABOUT SONG URLS
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            //Debug.Log("NUKING PLAYERPREFS FOR KEY: " + playerPrefKey);
+            //PlayerPrefs.DeleteKey(playerPrefKey);
+        }
     }
 
     /// <summary>
@@ -49,7 +91,7 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
     private void OpenFileBrowser(FileBrowserMode fileBrowserMode = FileBrowserMode.Read)
     {
         //Create the file browser and name it
-        GameObject fileBrowserObject = Instantiate(FileBrowserPrefab, transform);
+        GameObject fileBrowserObject = Instantiate(fileBrowserPrefab, transform);
         fileBrowserObject.name = "FileBrowser";
 
         //Set file explorer orientation
@@ -59,14 +101,14 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
         //Setup file explorer according to mode
         if (fileBrowserMode == FileBrowserMode.Write)
         {
-            fileBrowserScript.SaveFilePanel("DemoText", FileExtensions);
+            fileBrowserScript.SaveFilePanel("DemoText", fileExtensions);
 
             // Subscribe to OnFileSelect event
             fileBrowserScript.OnFileSelect += SaveFileUsingPath;
         }
         else
         {
-            fileBrowserScript.OpenFilePanel(FileExtensions);
+            fileBrowserScript.OpenFilePanel(fileExtensions);
 
             // Subscribe to OnFileSelect event
             fileBrowserScript.OnFileSelect += LoadFileUsingPath;
@@ -117,35 +159,24 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
         if (path.Length != 0)
         {
             Debug.Log("LoadFileUsingPath(string path). Path given=" + path);
-            //Invokes OnFileSelected event
-            //if (FileSelected != null)
-            //FileSelected.Invoke(path);
 
-            importer.Import(path);
+            //Save URL to a list of songs
+            //URLs should all be unique
+            if(!PlayerPrefExtension.Instance.ExistsWithinKey(playerPrefKey, path))
+            {
+                //Add new URL into list
+                List<string> urls = new List<string>();
+                urls = PlayerPrefExtension.Instance.GetStringArray(playerPrefKey).ToList();
+                urls.Add(path);
+                //Save updated list to PlayerPrefs
+                PlayerPrefExtension.Instance.SetStringArray(playerPrefKey, urls.ToArray());
+                //Get list of file URLs
+                fileURLs = PlayerPrefExtension.Instance.GetStringArray(playerPrefKey);
+            }
         }
         else
         {
             Debug.Log("Invalid path given");
         }
-    }
-
-    /// <summary>
-    /// Sets the audio clip within the specified audio source.
-    /// </summary>
-    /// <param name="clip">AudioClip to pass to the audio source.</param>
-    private void OnLoaded(AudioClip clip)
-    {
-        audioSource.clip = clip;
-        audioSource.Play();
-    }
-
-    /// <summary>
-    /// Imports file from specified filepath using AudioImporter.
-    /// </summary>
-    /// <param name="path">Location of the file.</param>
-    private void OnFileSelected(string path)
-    {
-        Debug.Log("OnFileSelected(string path). Path given=" + path);
-        importer.Import(path);
     }
 }

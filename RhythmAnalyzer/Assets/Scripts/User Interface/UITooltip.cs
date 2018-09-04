@@ -23,7 +23,26 @@ public class UITooltip : SingletonMonoBehaviour<UITooltip>
         }
         else if(objectUsingTooltip)
         {
-            transform.position = Input.mousePosition + new Vector3(GetComponent<RectTransform>().sizeDelta.x * 0.5f, -GetComponent<RectTransform>().sizeDelta.y, 0f);
+            //Sizing of tooltip
+            Vector3 tooltipSize = new Vector3(GetComponent<RectTransform>().sizeDelta.x, GetComponent<RectTransform>().sizeDelta.y, 0f);
+            //Tooltip offset
+            Vector3 tooltipOffsets = new Vector3(GetComponent<RectTransform>().sizeDelta.x * 0.55f, -GetComponent<RectTransform>().sizeDelta.y, 0f);
+            
+            //Constrain tooltip position to within canvas, taking into account the tooltip sizing
+            Vector3 tempPos = Input.mousePosition + tooltipOffsets;
+
+            //Tooltip will be too much to the right
+            if (tempPos.x + tooltipSize.x > canvas.GetComponent<RectTransform>().sizeDelta.x)
+            {
+                tooltipOffsets.x = -GetComponent<RectTransform>().sizeDelta.x * 0.55f;
+            }
+            //Tooltip will be too low
+            if (tempPos.y - tooltipSize.y < 0f)
+            {
+                tooltipOffsets.y = GetComponent<RectTransform>().sizeDelta.y;
+            }
+
+            transform.position = Input.mousePosition + tooltipOffsets;
         }
     }
 
