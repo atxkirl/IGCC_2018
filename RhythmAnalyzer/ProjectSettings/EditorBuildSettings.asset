@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Loading.unity
     guid: 60bb5bdeaa167934593f36556d8de47e
   - enabled: 1
-    path: Assets/Scenes/GameTest.unity
-    guid: 817eaf2d0be372c4aac3c1a716d18a74
+    path: Assets/Scenes/WaveSample.unity
+    guid: 8d06a2ce82ff00344bc61fb57e408680
   m_configObjects: {}

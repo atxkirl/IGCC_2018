@@ -152,6 +152,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 82459658575755978, guid: 69023e6e8a2fc314da7fd93803249b4c,
+        type: 2}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82459658575755978, guid: 69023e6e8a2fc314da7fd93803249b4c,
+        type: 2}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82459658575755978, guid: 69023e6e8a2fc314da7fd93803249b4c,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243060724230072742, guid: 3bb77d77df514024cb3af6360f0623f1,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69023e6e8a2fc314da7fd93803249b4c, type: 2}
   m_IsPrefabAsset: 0

@@ -16,9 +16,9 @@ public class MoveWave : MonoBehaviour
         Vector3 p = this.transform.position;
         gameObject.transform.position = new Vector3(p.x - waveSpeed, 0, 0);
 
-        if (transform.position == vanishingPoint)
+        if (transform.position.x <= vanishingPoint.x)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
-	}
+    }
 }

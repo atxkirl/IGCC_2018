@@ -17,6 +17,7 @@ public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
 
     private void Start()
     {
+        audioController = GameObject.Find("AudioController");
         objectPool = EZObjectPool.CreateObjectPool(objectToSpawn, "ObstacleSpawner", 10, true, true, false);
 
         //Get audio sources from AudioController in scene
@@ -25,10 +26,22 @@ public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
         //Get spectrum analyzer from AudioController
         spectrumAnalyzer = audioController.GetComponent<AudioAnalyzer>().spectrumAnalyzer;
 
+        //Find time-stamp of the first peak (ie time of the first obstacle)
+        float time = 0f;
+        for(int i = 0; i < spectrumAnalyzer.spectralFluxSamples.Count; ++i)
+        {
+            if(spectrumAnalyzer.spectralFluxSamples[i].isPeak)
+            {
+                time = spectrumAnalyzer.spectralFluxSamples[i].time;
+                break;
+            }
+        }
+
         //Calculate distance between player and spawner to calculate offset
         float distance = Vector3.Distance(transform.position, playerPosition.transform.position);
         //Now calculate time offset based on projectile speed and distance between
-        //timeOffset = distance / objectToSpawn.GetComponent<Projectile>().speed;
+        //The time of the first beat must be slightly shorter because of lag
+        timeOffset = (distance / objectToSpawn.GetComponent<Projectile>().speed) + (time * 0.9f);
     }
 
     private void Update()
@@ -49,15 +62,6 @@ public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
             {
                 SpawnObstacle();
             }
-
-            ////Real-time checking through the list of peak samples
-            //foreach (SpectralFluxInfo sf in audioController.GetComponent<AudioAnalyzer>().peakInfo)
-            //{
-            //    if (sf.time <= mutedSource.time + Time.deltaTime && sf.time >= mutedSource.time - Time.deltaTime)
-            //    {
-            //        SpawnObstacle();
-            //    }
-            //}
         }
     }
 

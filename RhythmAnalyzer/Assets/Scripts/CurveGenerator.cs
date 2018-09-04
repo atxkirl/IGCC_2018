@@ -62,7 +62,7 @@ public class CurveGenerator : MonoBehaviour
         Vector3 bottomRight = getScreenBottomRight();
         float screenXlength = bottomRight.x - topLeft.x;
 
-        if (audioAnalyzer.unmutedAudioSource.isPlaying)
+        if (audioAnalyzer.mutedAudioSource.isPlaying)
         {
             if (numframe < delayFrame)
             {
@@ -74,7 +74,7 @@ public class CurveGenerator : MonoBehaviour
             //Save spectrum data
             //スペクトラムデータを保存
             spectrumData = new float[spectrumAnalyzer.numSamples];
-            audioAnalyzer.unmutedAudioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
+            audioAnalyzer.mutedAudioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
 
             for (int i = 1; i < lineResolution - 1; ++i)
             {
@@ -105,6 +105,7 @@ public class CurveGenerator : MonoBehaviour
                 }
 
             }
+
             //Generate new wave
             GameObject floor = new GameObject("floor");
             floor.AddComponent<MeshRenderer>();
