@@ -1029,9 +1029,7 @@ GameObject:
   - component: {fileID: 786174391}
   - component: {fileID: 786174397}
   - component: {fileID: 786174396}
-  - component: {fileID: 786174399}
   - component: {fileID: 786174398}
-  - component: {fileID: 786174400}
   m_Layer: 0
   m_Name: Temp Player
   m_TagString: Untagged
@@ -1146,7 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb037844f7f0d8240b76ff5cc805936d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTapTimeThreshold: 0.1
+  activeTapTimeThreshold: 0.5
   finalizedTapWipeTimeThreshold: 0
 --- !u!114 &786174398
 MonoBehaviour:
@@ -1156,43 +1154,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 786174390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bc5f48af2cffd747a079fe8c632e2c8, type: 3}
+  m_Script: {fileID: 11500000, guid: e5dbdc58363f62b4bb06ffc96030cc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: COM5
-  baudRate: 9600
-  messageListener: {fileID: 786174390}
-  reconnectionDelay: 1000
-  maxUnreadMessages: 1
---- !u!114 &786174399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786174390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07388c67c3d667a4f937fe0d8458f771, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tapped: 0
---- !u!114 &786174400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786174390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 223f0e4bcadad324e9ab9a12c33326a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portName: COM5
-  baudRate: 9600
-  messageListener: {fileID: 786174390}
-  reconnectionDelay: 1000
-  maxUnreadMessages: 1
-  separator: 90
+  tap: 0
 --- !u!1 &832898351
 GameObject:
   m_ObjectHideFlags: 0
