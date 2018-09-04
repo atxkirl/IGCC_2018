@@ -12,7 +12,7 @@ public class LoadingScreen : MonoBehaviour
     private void Update()
     {
         //SPIN THE LOADERRRRRRR
-        loaderSpinner.transform.Rotate(0f, 0f, -Time.deltaTime * spinSpeed);
+        //loaderSpinner.transform.Rotate(0f, 0f, -Time.deltaTime * spinSpeed);
 
         //Leave Loading scene once audio analyzer is finished creating spectrum data
         if (AudioAnalyzer.Instance.isDone && !doOnce)

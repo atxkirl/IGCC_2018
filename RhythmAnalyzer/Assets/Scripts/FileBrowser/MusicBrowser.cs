@@ -74,16 +74,6 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
         fileURLs = PlayerPrefExtension.Instance.GetStringArray(playerPrefKey);
     }
 
-    private void Update()
-    {
-        //WARNING: THIS REMOVES PLAYERPREFS DATA ABOUT SONG URLS
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            //Debug.Log("NUKING PLAYERPREFS FOR KEY: " + playerPrefKey);
-            //PlayerPrefs.DeleteKey(playerPrefKey);
-        }
-    }
-
     /// <summary>
     /// Opens the file explorer according to the mode provided. Defaults to read mode.
     /// </summary>

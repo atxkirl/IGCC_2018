@@ -54,7 +54,7 @@ public class MusicList : MonoBehaviour
             }
 
             //Update music list every second
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 }
