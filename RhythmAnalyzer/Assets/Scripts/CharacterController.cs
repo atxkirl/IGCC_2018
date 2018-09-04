@@ -122,12 +122,12 @@ public class CharacterController : MonoBehaviour
             if (timer < slideTimer)
             {
                 timer += Time.deltaTime;
-                Quaternion target = Quaternion.Euler(-50, 90, 0);
+                Quaternion target = Quaternion.Euler(0, 0, 30);
                 transform.rotation = target;
             }
             else
             {
-                Quaternion target = Quaternion.Euler(0, 90, 0);
+                Quaternion target = Quaternion.Euler(0, 0, 0);
                 transform.rotation = target;
                 timer = 0;
                 slide = false;

@@ -24,8 +24,6 @@ public class AccelerometerControls : MonoBehaviour {
         prevZ = currZ;
         tapped = false;
         timer = 0.0f;
-        //Debug.Log(ArduinoSerialMsgReader.Instance.accel);
-        //initialAccl.Set(ArduinoSerialMsgReader.Instance.accel.x, ArduinoSerialMsgReader.Instance.accel.y, ArduinoSerialMsgReader.Instance.accel.z);
     }
     void Test(string[] msg)
     {
@@ -34,39 +32,16 @@ public class AccelerometerControls : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
        ArduinoSerialMsgReader.Instance.onAccelerometerMsgRecieved += Test;
-        //initialAccl.Set(ArduinoSerialMsgReader.Instance.accel.x, ArduinoSerialMsgReader.Instance.accel.y, ArduinoSerialMsgReader.Instance.accel.z);
         if(prev.Count >= 10)
         {
             prev.Dequeue();
         }
-        //prev.Enqueue(initialAccl);
-       // Debug.Log(initialAccl);
-       // currZ = initialAccl.z;
-       // text.text =/* "X = " + initialAccl.x + "Y = " + initialAccl.y +*/ "Z = " + initialAccl.z;     
         if(ArduinoSerialMsgReader.Instance.tapped == true)
         {
             tapped = true;
         }
         if (tapped)
         {
-            //currZ = prev.ElementAt(prev.Count - 1).z;
-            //if (currZ <= 0.62 && currZ >= 0.59)
-            //{
-            //    bool impact = false;
-            //    for (int i = 0; i < prev.Count - 1; i++)
-            //    {
-            //        if (currZ < prev.ElementAt(i).z && (prev.ElementAt(i).z - currZ) >= 0.02f)
-            //        {
-            //            impact = true;
-            //        }
-            //    }
-            //    if(impact)
-            //    {
-            //        Debug.Log("Adrian");
-            //        tapped = true;
-            //        cube.SetActive(true);
-            //    }
-            //}
             Debug.Log("Adrian");
             cube.SetActive(true);
                 ArduinoSerialMsgReader.Instance.tapped = false;
