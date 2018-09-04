@@ -5,7 +5,7 @@ using System.Numerics;
 using UnityEngine;
 using DSPLib;
 
-public class AudioAnalyzer : MonoBehaviour
+public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
 {
     ///Audio Clip variables
     private int totalNumberOfSamples;
@@ -18,30 +18,23 @@ public class AudioAnalyzer : MonoBehaviour
     public AudioSource mutedAudioSource;
     public SpectrumAnalyzer spectrumAnalyzer;
 
+    public bool isDone;
+
     //TESTING VARIABLES
     public List<SpectralFluxInfo> peakInfo;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
-        //Make sure both audio sources are using the same audio clip
-        mutedAudioSource.clip = unmutedAudioSource.clip;
+        //Clear both audio sources
+        mutedAudioSource.clip = null;
+        unmutedAudioSource.clip = null;
 
-        //Initalize all TESTING variables
-        peakInfo = new List<SpectralFluxInfo>();
-
-        //Initialize data from AudioSource component
-        numberOfChannels = unmutedAudioSource.clip.channels;
-        totalNumberOfSamples = unmutedAudioSource.clip.samples;
-        clipLength = unmutedAudioSource.clip.length;
-        sampleRate = unmutedAudioSource.clip.frequency;
-
-        //Get spectral data from AudioSource component
-        multiChannelSamples = new float[unmutedAudioSource.clip.samples * unmutedAudioSource.clip.channels];
-        unmutedAudioSource.clip.GetData(multiChannelSamples, 0);
-
-        //Create a thread to get all of the spectrum data
-        Thread spectrumThread = new Thread(AnalyzeFullSpectrum);
-        spectrumThread.Start();
+        isDone = false;
     }
 
     private void Update()
@@ -66,6 +59,33 @@ public class AudioAnalyzer : MonoBehaviour
     public int GetIndex(float currTime)
     {
         return Mathf.FloorToInt(currTime / (clipLength / totalNumberOfSamples));
+    }
+
+    public void SetAudio(AudioClip clip)
+    {
+        //Set audio clips
+        unmutedAudioSource.clip = clip;
+        mutedAudioSource.clip = clip;
+        //Make sure they aren't playing
+        unmutedAudioSource.Stop();
+        mutedAudioSource.Stop();
+
+        //Initalize all TESTING variables
+        peakInfo = new List<SpectralFluxInfo>();
+
+        //Initialize data from AudioSource component
+        numberOfChannels = unmutedAudioSource.clip.channels;
+        totalNumberOfSamples = unmutedAudioSource.clip.samples;
+        clipLength = unmutedAudioSource.clip.length;
+        sampleRate = unmutedAudioSource.clip.frequency;
+
+        //Get spectral data from AudioSource component
+        multiChannelSamples = new float[unmutedAudioSource.clip.samples * unmutedAudioSource.clip.channels];
+        unmutedAudioSource.clip.GetData(multiChannelSamples, 0);
+
+        //Create a thread to get all of the spectrum data
+        Thread spectrumThread = new Thread(AnalyzeFullSpectrum);
+        spectrumThread.Start();
     }
 
     private void AnalyzeFullSpectrum()
@@ -143,6 +163,7 @@ public class AudioAnalyzer : MonoBehaviour
             }
 
             Debug.Log("Spectrum Analysis and Peak Sampling done. Thread completed.");
+            isDone = true;
         }
         catch(System.Exception ex)
         {
