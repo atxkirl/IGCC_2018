@@ -9,7 +9,14 @@ using System.Linq;
 
 public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
 {
-    private AudioImporter importer;
+#if UNITY_ANDROID
+    public MobileImporter audioImporter;
+#endif
+
+#if UNITY_STANDALONE_WIN
+    public NAudioImporter audioImporter;
+#endif 
+
     private AudioSource audioSource;
 
     //File browser prefab
@@ -39,7 +46,14 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
         }
 
         //Get components for audio importer and source
-        importer = GetComponent<AudioImporter>();
+#if UNITY_ANDROID
+        audioImporter = gameObject.AddComponent<MobileImporter>();
+#endif
+
+#if UNITY_STANDALONE_WIN
+        audioImporter = gameObject.AddComponent<NAudioImporter>();
+#endif
+
         audioSource = GetComponent<AudioSource>();
 
         //Default URLs
