@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 1279017752}
   - component: {fileID: 1279017753}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: FloorGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,11 +428,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioController: {fileID: 0}
   mainCamera: {fileID: 282840813}
-  floorMaterial: {fileID: 2100000, guid: b25d389f81f8c1f43824598584b7ca5f, type: 2}
-  lineResolution: 50
-  maxValue: 5
+  floorMaterial: {fileID: 2100000, guid: bbe25d0604f985843a9a85a56a24c7a1, type: 2}
+  lineResolution: 25
+  waveTop: 6
+  waveBottom: -4
+  maxValue: 8
   magnificationPower: 100
-  waveSpeed: 1
+  waveSpeed: 0.7
   divisionNum: 3
   delayFrame: 60
 --- !u!1 &1504100660
