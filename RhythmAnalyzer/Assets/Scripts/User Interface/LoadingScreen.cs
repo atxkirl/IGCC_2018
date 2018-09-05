@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class LoadingScreen : MonoBehaviour
 {
-    public GameObject loaderSpinner;
-    public int spinSpeed;
+    public int sceneToLoad = 2;
 
     private bool doOnce = false;
 
+    private void Start()
+    {
+        doOnce = false;
+    }
+
     private void Update()
     {
-        //SPIN THE LOADERRRRRRR
-        //loaderSpinner.transform.Rotate(0f, 0f, -Time.deltaTime * spinSpeed);
-
         //Leave Loading scene once audio analyzer is finished creating spectrum data
         if (AudioAnalyzer.Instance.isDone && !doOnce)
         {
-            SceneController.Instance.LoadNextScene();
+            SceneController.Instance.LoadScene(sceneToLoad);
             doOnce = true;
         }
     }

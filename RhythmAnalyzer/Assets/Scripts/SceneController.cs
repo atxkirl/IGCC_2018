@@ -10,11 +10,6 @@ public class SceneController : SingletonMonoBehaviour<SceneController>
 
     private bool loadScene = false;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     public void LoadScene(int sceneToLoad)
     {
         currScene = sceneToLoad;
@@ -28,6 +23,9 @@ public class SceneController : SingletonMonoBehaviour<SceneController>
 
     IEnumerator Load(int sceneToLoad)
     {
+        //Set current sceneID
+        sceneID = sceneToLoad;
+
         //Start Asynchronous operation to load the new scene
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneToLoad);
 
@@ -39,12 +37,17 @@ public class SceneController : SingletonMonoBehaviour<SceneController>
     {
         //Increment sceneID
         sceneID++;
-        //Start Asynchronous operation to load the new scene
-        AsyncOperation async = SceneManager.LoadSceneAsync(sceneID);
+        
+        //Make sure we don't go over the number of scenes
+        if(sceneID < SceneManager.sceneCount)
+        {
+            //Start Asynchronous operation to load the new scene
+            AsyncOperation async = SceneManager.LoadSceneAsync(sceneID);
 
-        Debug.Log("Loading Next Scene with ID of '" + sceneID + "'");
+            Debug.Log("Loading Next Scene with ID of '" + sceneID + "'");
 
-        while (!async.isDone)
-            yield return null;
+            while (!async.isDone)
+                yield return null;
+        }
     }
 }

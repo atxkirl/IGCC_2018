@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-
-
     [SerializeField]
     TapControllerInputModule tapController;
     [SerializeField]

@@ -8,10 +8,10 @@ using DSPLib;
 public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
 {
     ///Audio Clip variables
-    private int totalNumberOfSamples;
-    private int numberOfChannels;
-    private int sampleRate;
-    private float clipLength;
+    public int totalNumberOfSamples;
+    public int numberOfChannels;
+    public int sampleRate;
+    public float clipLength;
     private float[] multiChannelSamples;
 
     public AudioSource unmutedAudioSource;
@@ -21,12 +21,8 @@ public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
     public bool isDone;
 
     //TESTING VARIABLES
+    public int peakInfoSize;
     public List<SpectralFluxInfo> peakInfo;
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
     private void Start()
     {
@@ -39,8 +35,21 @@ public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
 
     private void Update()
     {
-        //Get the current index of the from the audio timeline
-        //int currentIndex = GetIndex(audioSource.time) / spectrumAnalyzer.numSamples;
+        //Check pausing
+        if(GameController.Instance.gamePaused)
+        {
+            if(unmutedAudioSource.isPlaying || mutedAudioSource.isPlaying)
+            {
+                PauseAudio();
+            }
+        }
+        else if (!GameController.Instance.gamePaused)
+        {
+            if (!unmutedAudioSource.isPlaying || !mutedAudioSource.isPlaying)
+            {
+                ResumeAudio();
+            }
+        }
     }
 
     //FUNCTIONS
@@ -63,6 +72,11 @@ public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
 
     public void SetAudio(AudioClip clip)
     {
+        //Reset AudioAnalyzer
+        ResetAnalyzer();
+        //Reset SpectrumAnalyzer
+        spectrumAnalyzer.ResetAnalyzer();
+
         //Set audio clips
         unmutedAudioSource.clip = clip;
         mutedAudioSource.clip = clip;
@@ -163,6 +177,7 @@ public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
             }
 
             Debug.Log("Spectrum Analysis and Peak Sampling done. Thread completed.");
+            peakInfoSize = peakInfo.Count;
             isDone = true;
         }
         catch(System.Exception ex)
@@ -170,5 +185,45 @@ public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
             //Error logging
             Debug.LogError(ex.ToString());
         }
+    }
+
+    public void PauseAudio()
+    {
+        unmutedAudioSource.Pause();
+        mutedAudioSource.Pause();
+    }
+
+    public void ResumeAudio()
+    {
+        unmutedAudioSource.UnPause();
+        mutedAudioSource.UnPause();
+    }
+
+    public void StopAudio()
+    {
+        unmutedAudioSource.Stop();
+        mutedAudioSource.Stop();
+
+        unmutedAudioSource.clip = null;
+        mutedAudioSource.clip = null;
+    }
+
+    public void ResetAnalyzer()
+    {
+        //Reset flag
+        isDone = false;
+
+        //Make sure they aren't playing
+        unmutedAudioSource.Stop();
+        mutedAudioSource.Stop();
+        //Set audio clips
+        unmutedAudioSource.clip = null;
+        mutedAudioSource.clip = null;
+
+        //Initialize data from AudioSource component
+        numberOfChannels = 0;
+        totalNumberOfSamples = 0;
+        clipLength = 0;
+        sampleRate = 0;
     }
 }

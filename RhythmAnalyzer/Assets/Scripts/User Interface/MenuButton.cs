@@ -14,7 +14,7 @@ public class MenuButton : UIButtonBase, IPointerClickHandler
         menu.SetActive(startActive);
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public virtual void OnPointerClick(PointerEventData eventData)
     {
         menu.SetActive(!menu.activeSelf);
 

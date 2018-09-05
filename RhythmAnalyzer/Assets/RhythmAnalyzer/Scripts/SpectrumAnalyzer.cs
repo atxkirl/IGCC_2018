@@ -22,7 +22,7 @@ public class SpectrumAnalyzer : MonoBehaviour
 
     //Sensitivity Multiplier to check if a rectified spectral flux sample is a peak
     //By default if the sample is 1.5x larger than the average then it is counted as a peak
-    private float thresholdMultiplier = 1.5f;
+    private float thresholdMultiplier = 1.25f;
 
     //Number of samples to average against to detect peak samples
     //By default we need a minimum of 50 samples before we can detect a peak
@@ -179,5 +179,17 @@ public class SpectrumAnalyzer : MonoBehaviour
         {
             //Debug.Log(string.Format("Not enough samples to detect peaks. Current spectral flux sample size of {0} growing to {1}", spectralFluxSamples.Count, thresholdSamplesNeeded));
         }
+    }
+
+    public void ResetAnalyzer()
+    {
+        //Initialize list of samples
+        spectralFluxSamples = new List<SpectralFluxInfo>();
+
+        //Start processing at the middle of the first window
+        indexToProcess = (int)(thresholdSamplesNeeded * 0.5f);
+
+        currSpectrum = new float[numSamples];
+        prevSpectrum = new float[numSamples];
     }
 }

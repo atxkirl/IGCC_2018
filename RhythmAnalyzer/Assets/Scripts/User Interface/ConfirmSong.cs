@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class ConfirmSong : UIButtonBase, IPointerClickHandler
 {
-    public GameObject audioController;
+    public GameObject audioPreviewer;
     public string gameScene;
+    public int sceneToLoad = 1;
 
     protected override void Start()
     {
@@ -17,6 +18,9 @@ public class ConfirmSong : UIButtonBase, IPointerClickHandler
         //Reset everytime it starts
         GetComponent<Button>().interactable = false;
         MusicPreview.Instance.audioSource.clip = null;
+
+        //Get AudioController
+        audioPreviewer = GameObject.Find("AudioPreviewer");
     }
 
     protected override void Update()
@@ -33,7 +37,7 @@ public class ConfirmSong : UIButtonBase, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         //Audio has been selected
-        if(audioController.GetComponent<AudioSource>().clip != null)
+        if(MusicPreview.Instance.audioSource.clip != null)
         {
             //Stops audio source
             MusicPreview.Instance.audioSource.Stop();
@@ -44,7 +48,7 @@ public class ConfirmSong : UIButtonBase, IPointerClickHandler
 
             //Go to loading screen
             Debug.Log("Loading game");
-            SceneController.Instance.LoadNextScene();
+            SceneController.Instance.LoadScene(sceneToLoad);
         }
     }
 }
