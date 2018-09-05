@@ -74,6 +74,14 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
         fileURLs = PlayerPrefExtension.Instance.GetStringArray(playerPrefKey);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayerPrefs.DeleteKey(playerPrefKey);
+        }
+    }
+
     /// <summary>
     /// Opens the file explorer according to the mode provided. Defaults to read mode.
     /// </summary>

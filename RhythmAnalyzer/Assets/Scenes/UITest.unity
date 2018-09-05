@@ -152,6 +152,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 82459658575755978, guid: 69023e6e8a2fc314da7fd93803249b4c,
+        type: 2}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82459658575755978, guid: 69023e6e8a2fc314da7fd93803249b4c,
+        type: 2}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82459658575755978, guid: 69023e6e8a2fc314da7fd93803249b4c,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243060724230072742, guid: 3bb77d77df514024cb3af6360f0623f1,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69023e6e8a2fc314da7fd93803249b4c, type: 2}
   m_IsPrefabAsset: 0
@@ -2662,7 +2678,7 @@ Prefab:
     - target: {fileID: 224531596704416838, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 42
+      value: 38.21138
       objectReference: {fileID: 0}
     - target: {fileID: 224531596704416838, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
@@ -2697,12 +2713,12 @@ Prefab:
     - target: {fileID: 224275023503567252, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -21
+      value: -19.10569
       objectReference: {fileID: 0}
     - target: {fileID: 224275023503567252, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 22
+      value: 18.21138
       objectReference: {fileID: 0}
     - target: {fileID: 114756000871995462, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
@@ -3191,8 +3207,7 @@ MonoBehaviour:
   fileExtensions:
   - mp3
   fileURLs: []
-  defaultURLs:
-  - C:\Users\KamKIGCC\Desktop\IGCC2018\RhythmAnalyzer\Assets\RhythmAnalyzer\Audio\nggyu.mp3
+  defaultURLs: []
   importedAudio: []
 --- !u!4 &1830187081
 Transform:
