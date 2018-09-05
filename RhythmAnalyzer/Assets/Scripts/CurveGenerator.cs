@@ -201,6 +201,7 @@ public class CurveGenerator : MonoBehaviour
     public float magnificationPower = 1.0f;
     public float waveSpeed = 1.0f;
     public int divisionNum = 0;
+    public float perlinNoiseScale = 1.0f;
 
     private List<Vector3> vertexList = new List<Vector3>();
     private List<Vector2> uxList = new List<Vector2>();
@@ -213,6 +214,7 @@ public class CurveGenerator : MonoBehaviour
 
     public int delayFrame;
     int numframe;
+    float time = 0;
 
 
     private void Start()
@@ -261,7 +263,7 @@ public class CurveGenerator : MonoBehaviour
             spectrumData = new float[spectrumAnalyzer.numSamples];
             audioAnalyzer.unmutedAudioSource.GetSpectrumData(spectrumData, 0, FFTWindow.BlackmanHarris);
 
-            for (int i = 1; i < lineResolution - 1; ++i)
+            for (int i = 0; i < lineResolution + 1; ++i)
             {
                 float height = 0.0f;
                 //for (int n = 0; n < spectrumData.Length * 0.25f; ++n)
@@ -269,6 +271,8 @@ public class CurveGenerator : MonoBehaviour
                 //    height += spectrumData[n];
                 //}
                 height = spectrumData[i] * magnificationPower;
+
+
                 if (height > maxValue)
                 {
                     height = maxValue;
@@ -276,20 +280,38 @@ public class CurveGenerator : MonoBehaviour
 
                 //lineRenderer.SetPosition(i, new Vector3(i * 0.5f, Mathf.Sin(i + Time.time), 0.0f));
 
-                int tmp1 = 1 + ((divisionNum + 1) * 2) * i;
-                int tmp2 = 1 + ((divisionNum + 1) * 2) * (i - 1);
-                int tmp3;
-                vertexList[tmp1] = new Vector3(vertexList[tmp1].x, height + waveTop, 0f);
-
-                //interpolation
-                for (int j = 1; j <= divisionNum; j++)
+                if (i > 0)
                 {
-                    tmp3 = tmp2 + j * 2;
-                    float y = Mathf.SmoothStep(vertexList[tmp2].y, vertexList[tmp1].y, 1.0f / divisionNum * j);
-                    vertexList[tmp3] = new Vector3(vertexList[tmp3].x, y, 0);
-                }
+                    int tmp1 = 1 + ((divisionNum + 1) * 2) * i;
+                    int tmp2 = 1 + ((divisionNum + 1) * 2) * (i - 1);
+                    int tmp3;
+                    float xSample = 100;
+                    float ySample = height / perlinNoiseScale + time; time += Time.deltaTime;
 
+                    height = ((Noise.PerlinNoise(Mathf.Abs(ySample))) * magnificationPower);
+
+                    //if(height < 0)
+                    //{
+                    //    height = 0;
+                    //}
+
+                    vertexList[tmp1] = new Vector3(vertexList[tmp1].x, Mathf.Abs(height) + waveTop, 0f);
+
+                    //interpolation
+                    for (int j = 1; j <= divisionNum; j++)
+                    {
+                        tmp3 = tmp2 + j * 2;
+                        float y = Mathf.SmoothStep(vertexList[tmp2].y, vertexList[tmp1].y, 1.0f / divisionNum * j);
+                        vertexList[tmp3] = new Vector3(vertexList[tmp3].x, y, 0);
+                    }
+                }
+                else
+                {
+                    vertexList[0] = vertexList[vertexList.Count - 1];
+                    //vertexList[1 + ((divisionNum + 1) * 2) * i] = new Vector3(vertexList[1 + ((divisionNum + 1) * 2) * i].x, vertexList[vertexList.Count].y, 0f);
+                }
             }
+
             //Generate new wave
             GameObject floor = new GameObject("floor");
             floor.AddComponent<MeshRenderer>();
@@ -310,7 +332,7 @@ public class CurveGenerator : MonoBehaviour
             else
             {
                 Vector3 p = previousFrameGameObject.transform.position;
-                floor.transform.position = new Vector3(bottomRight.x + screenXlength, 0, 0);
+                floor.transform.position = new Vector3(p.x + screenXlength - waveSpeed * 2, 0, 0);
             }
 
             previousFrameGameObject = floor;
@@ -379,4 +401,10 @@ public class CurveGenerator : MonoBehaviour
         bottomRight.Scale(new Vector3(1f, -1f, 1f));
         return bottomRight;
     }
+
+    //private float CalculateHeight(int x, int y)
+    //{
+        
+    //}
 }
+

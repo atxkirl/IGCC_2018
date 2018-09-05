@@ -45,6 +45,9 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
             Debug.LogError("Make sure there is a canvas GameObject present in the Hierarcy.");
         }
 
+        //Make sure game is unpaused
+        GameController.Instance.gamePaused = false;
+
         //Get components for audio importer and source
 #if UNITY_ANDROID
         audioImporter = gameObject.AddComponent<MobileImporter>();

@@ -59,16 +59,20 @@ public class GameController : SingletonMonoBehaviour<GameController>
         //Player died
         if (Player.Instance.isDead && gameoverScreen != null)
         {
-            //Debug.Log("PLAYER DEAD");
+            Debug.Log("PLAYER DEAD");
             gameoverScreen.GetComponent<GameOverScreen>().ShowScreen();
             gamePaused = true;
         }
         //Player has won the game
-        if (currentAudioState == AudioState.ENDED && winScreen != null)
+        else if (currentAudioState == AudioState.ENDED && winScreen != null)
         {
-            //Debug.Log("PLAYER WINS");
+            Debug.Log("PLAYER WINS");
             winScreen.GetComponent<WinScreen>().ShowScreen();
             gamePaused = true;
+        }
+        else
+        {
+            gamePaused = false;
         }
     }
 }
