@@ -195,6 +195,8 @@ public class CurveGenerator : MonoBehaviour
     public Material floorMaterial;
 
     public int lineResolution;
+    public float waveTop = 0.0f;
+    public float waveBottom = -4.0f;
     public float maxValue = 1.0f;
     public float magnificationPower = 1.0f;
     public float waveSpeed = 1.0f;
@@ -277,7 +279,7 @@ public class CurveGenerator : MonoBehaviour
                 int tmp1 = 1 + ((divisionNum + 1) * 2) * i;
                 int tmp2 = 1 + ((divisionNum + 1) * 2) * (i - 1);
                 int tmp3;
-                vertexList[tmp1] = new Vector3(vertexList[tmp1].x, height, 0f);
+                vertexList[tmp1] = new Vector3(vertexList[tmp1].x, height + waveTop, 0f);
 
                 //interpolation
                 for (int j = 1; j <= divisionNum; j++)
@@ -326,8 +328,8 @@ public class CurveGenerator : MonoBehaviour
 
         var mesh = new Mesh();
 
-        vertexList.Add(new Vector3(topLeft.x, -4, 0));
-        vertexList.Add(new Vector3(topLeft.x, 0, 0));
+        vertexList.Add(new Vector3(topLeft.x, waveBottom, 0));
+        vertexList.Add(new Vector3(topLeft.x, waveTop, 0));
 
 
         Vector3[] vertmp = new Vector3[4];
@@ -335,8 +337,8 @@ public class CurveGenerator : MonoBehaviour
 
         for (int i = 1; i < meshNum; i++)
         {
-            vertmp[0] = new Vector3(topLeft.x + (meshLength * i), -4, 0);
-            vertmp[1] = new Vector3(topLeft.x + (meshLength * i), 0, 0);
+            vertmp[0] = new Vector3(topLeft.x + (meshLength * i), waveBottom, 0);
+            vertmp[1] = new Vector3(topLeft.x + (meshLength * i), waveTop, 0);
 
             vertexList.AddRange(new[] { vertmp[0], vertmp[1] });
 
@@ -348,8 +350,8 @@ public class CurveGenerator : MonoBehaviour
                 tmp += 4;
             }
         }
-        vertexList.Add(new Vector3(bottomRight.x, -4, 0));
-        vertexList.Add(new Vector3(bottomRight.x, 0, 0));
+        vertexList.Add(new Vector3(bottomRight.x, waveBottom, 0));
+        vertexList.Add(new Vector3(bottomRight.x, waveTop, 0));
         indexList.AddRange(new[] { 0 + tmp, 1 + tmp, 2 + tmp, 2 + tmp, 1 + tmp, 3 + tmp });
         indexList.AddRange(new[] { 0 + tmp + 2, 1 + tmp + 2, 2 + tmp + 2, 2 + tmp + 2, 1 + tmp + 2, 3 + tmp + 2 });
 

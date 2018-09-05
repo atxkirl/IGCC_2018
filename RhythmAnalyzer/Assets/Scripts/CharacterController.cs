@@ -14,6 +14,8 @@ public class CharacterController : MonoBehaviour
     private float jumpHeight;
     [SerializeField]
     GameObject line;
+    [SerializeField]
+    Animator animator;
 
     //public ArduinoSerialMsgReader ArduinoSerialMsgReader;
     LineRenderer lineRenderer;
@@ -49,6 +51,10 @@ public class CharacterController : MonoBehaviour
             {
                 initialHeight = linePoints[i].y + 2;
             }
+        }
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            animator.SetBool("Change", !animator.GetBool("Change"));
         }
         if (!jump && !fall)
         {
