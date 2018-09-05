@@ -22,7 +22,7 @@ public class SpectrumAnalyzer : MonoBehaviour
 
     //Sensitivity Multiplier to check if a rectified spectral flux sample is a peak
     //By default if the sample is 1.5x larger than the average then it is counted as a peak
-    public float thresholdMultiplier = 1.5f;
+    private float thresholdMultiplier = 1.5f;
 
     //Number of samples to average against to detect peak samples
     //By default we need a minimum of 50 samples before we can detect a peak

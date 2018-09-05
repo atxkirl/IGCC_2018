@@ -9,14 +9,11 @@ public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
     public GameObject audioController;
     public GameObject playerPosition;
     public float timeOffset;
-    public float timeBetweenSpawns;
 
     private AudioSource mutedSource;
     private AudioSource unmutedSource;
     private SpectrumAnalyzer spectrumAnalyzer;
     private EZObjectPool objectPool;
-    private float elapsedTime;
-    private float bounceTime;
 
     private void Start()
     {
@@ -49,10 +46,8 @@ public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
-
-        //if (Input.GetKeyDown(KeyCode.Return) && !mutedSource.isPlaying)
-        if (!mutedSource.isPlaying)
+        //TESTING WITH ENTER KEY
+        if (Input.GetKeyDown(KeyCode.Return) && !mutedSource.isPlaying)
         {
             //Start audio playing
             StartAudio();
@@ -63,11 +58,9 @@ public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
         {
             //Real-time checking through the entire processed list of samples
             int index = audioController.GetComponent<AudioAnalyzer>().GetIndex(mutedSource.time) / 1024;
-            if (spectrumAnalyzer.spectralFluxSamples[index].isPeak && elapsedTime < bounceTime)
+            if (spectrumAnalyzer.spectralFluxSamples[index].isPeak)
             {
                 SpawnObstacle();
-
-                bounceTime = elapsedTime + timeBetweenSpawns;
             }
         }
     }

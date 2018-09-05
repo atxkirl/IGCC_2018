@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class MusicPreview : SingletonMonoBehaviour<MusicPreview>
 {
-#if UNITY_ANDROID
-    public MobileImporter audioImporter;
-#endif
-
-#if UNITY_STANDALONE_WIN
-    public NAudioImporter audioImporter;
-#endif 
-
     public AudioSource audioSource;
+    public NAudioImporter audioImporter;
     public bool playImmediate;
 
     private void Awake()
@@ -23,14 +16,7 @@ public class MusicPreview : SingletonMonoBehaviour<MusicPreview>
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
-#if UNITY_ANDROID
-    audioImporter = gameObject.AddComponent<MobileImporter>();
-#endif
-
-#if UNITY_STANDALONE_WIN
-        audioImporter = gameObject.AddComponent<NAudioImporter>();
-#endif
+        audioImporter = GetComponent<NAudioImporter>();
 
         audioSource.clip = null;
         playImmediate = false;

@@ -430,11 +430,11 @@ MonoBehaviour:
   mainCamera: {fileID: 282840813}
   floorMaterial: {fileID: 2100000, guid: b25d389f81f8c1f43824598584b7ca5f, type: 2}
   lineResolution: 50
-  maxValue: 10
+  maxValue: 5
   magnificationPower: 100
-  waveSpeed: 3
-  divisionNum: 2
-  delayFrame: 30
+  waveSpeed: 1
+  divisionNum: 3
+  delayFrame: 60
 --- !u!1 &1504100660
 GameObject:
   m_ObjectHideFlags: 0

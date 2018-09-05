@@ -182,7 +182,6 @@ GameObject:
   - component: {fileID: 192957327}
   - component: {fileID: 192957326}
   - component: {fileID: 192957325}
-  - component: {fileID: 192957329}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -267,17 +266,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &192957329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 192957324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370c42a2e20f19a4d853c509c31408a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &221202793
 Prefab:
   m_ObjectHideFlags: 0
@@ -1993,6 +1981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 927227908}
   - component: {fileID: 927227907}
+  - component: {fileID: 927227906}
   - component: {fileID: 927227909}
   m_Layer: 0
   m_Name: Selected Audio
@@ -2001,6 +1990,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &927227906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 927227905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966290f034e2e1247bd09230d4845480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &927227907
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2120,8 +2120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c2ff9fc9ab5c84aa4fc6dc6cc90e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioImporter: {fileID: 0}
   audioSource: {fileID: 0}
+  audioImporter: {fileID: 0}
   playImmediate: 0
 --- !u!1001 &1042713275
 Prefab:
@@ -2678,7 +2678,7 @@ Prefab:
     - target: {fileID: 224531596704416838, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 40.869568
+      value: 38.21138
       objectReference: {fileID: 0}
     - target: {fileID: 224531596704416838, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
@@ -2713,12 +2713,12 @@ Prefab:
     - target: {fileID: 224275023503567252, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -20.434784
+      value: -19.10569
       objectReference: {fileID: 0}
     - target: {fileID: 224275023503567252, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 20.869568
+      value: 18.21138
       objectReference: {fileID: 0}
     - target: {fileID: 114756000871995462, guid: a3b9b2872ad57f543918cdc7cfe9e939,
         type: 2}
@@ -3201,15 +3201,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf27b493da55d5245941ae7cf733ee03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioImporter: {fileID: 0}
   fileBrowserPrefab: {fileID: 1094565512627362, guid: 4599b5ba3543545db92bb18160cea721,
     type: 2}
   orientation: 0
   fileExtensions:
   - mp3
   fileURLs: []
-  defaultURLs:
-  - C:\Users\KamKIGCC\Desktop\IGCC2018\RhythmAnalyzer\Assets\RhythmAnalyzer\Audio\nggyu.mp3
+  defaultURLs: []
   importedAudio: []
 --- !u!4 &1830187081
 Transform:

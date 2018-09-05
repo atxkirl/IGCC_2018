@@ -7,16 +7,16 @@ public class MoveWave : MonoBehaviour
     public float waveSpeed = 1.0f;
     public Vector3 vanishingPoint;
 
-	void Start()
+
+    void Start()
     {
 	}
 
     void Update()
     {
-        Vector3 p = this.transform.position;
-        gameObject.transform.position = new Vector3(p.x - waveSpeed, 0, 0);
+        this.transform.position = new Vector3(transform.position.x - waveSpeed, 0, 0);
 
-        if (transform.position.x <= vanishingPoint.x)
+        if(transform.position.x <= vanishingPoint.x)
         {
             Destroy(this.gameObject);
         }
