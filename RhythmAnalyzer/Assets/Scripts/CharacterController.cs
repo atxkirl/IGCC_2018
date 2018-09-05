@@ -43,6 +43,19 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("idle") && !jump)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        if(jump || fall)
+        {
+            transform.localScale = new Vector3(6, 6, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(5, 5, 1);
+        }
+
         //ArduinoSerialMsgReader.Instance.onAccelerometerMsgRecieved += Test;
         Vector3[] linePoints = new Vector3[lineRenderer.positionCount];
         lineRenderer.GetPositions(linePoints);
@@ -56,7 +69,7 @@ public class CharacterController : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.Space))
         {
-            animator.SetBool("Change", !animator.GetBool("Change"));
+            //animator.SetBool("Change", !animator.GetBool("Change"));
         }
         if (!jump && !fall)
         {
@@ -91,9 +104,19 @@ public class CharacterController : MonoBehaviour
             Debug.Log("Adrian1");
             if (!jump && !fall && !slide)
             {
+                transform.GetChild(0).gameObject.SetActive(false);
                 jump = true;
+                animator.SetBool("Jump", jump);
             }
 
+        }
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("idle"))
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
         }
         if (tapController.GetDoubleTap())
         {
@@ -101,6 +124,8 @@ public class CharacterController : MonoBehaviour
             {
                 Debug.Log("Adrian2");
                 slide = true;
+                animator.SetBool("Slide", slide);
+                transform.GetChild(0).gameObject.SetActive(false);
             }
         }
         if (tapController.GetTripleTap())
@@ -117,6 +142,9 @@ public class CharacterController : MonoBehaviour
             {
                 jump = false;
                 fall = true;
+                animator.SetBool("Jump", jump);
+                animator.SetBool("Fall", fall);
+                //animator.SetBool("Change", !animator.GetBool("Change"));
             }
         }
         if (fall)
@@ -128,8 +156,8 @@ public class CharacterController : MonoBehaviour
             if (timer < slideTimer)
             {
                 timer += Time.deltaTime;
-                Quaternion target = Quaternion.Euler(0, 0, 30);
-                transform.rotation = target;
+                //Quaternion target = Quaternion.Euler(0, 0, 30);
+                //transform.rotation = target;
             }
             else
             {
@@ -137,12 +165,30 @@ public class CharacterController : MonoBehaviour
                 transform.rotation = target;
                 timer = 0;
                 slide = false;
+                animator.SetBool("Slide", slide);
+                transform.GetChild(0).gameObject.SetActive(true);
             }
         }
         transform.position += target * speed * Time.deltaTime;
         if (transform.position.y <= initialHeight && fall)
         {
             fall = false;
+
+            animator.SetBool("Fall", fall);
+            animator.SetBool("Change", !animator.GetBool("Change"));
+            //transform.GetChild(0).gameObject.SetActive(true);
+            if (animator.GetCurrentAnimatorStateInfo(0).IsTag("idle") && !jump)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+            }
+        }
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("idle") && !jump)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

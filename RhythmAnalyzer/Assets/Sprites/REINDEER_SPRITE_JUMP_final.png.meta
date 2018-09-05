@@ -1,0 +1,540 @@
+fileFormatVersion: 2
+guid: 6a0f5b0759d5a664793013f85321d184
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: REINDEER_SPRITE_JUMP_final_0
+    21300002: REINDEER_SPRITE_JUMP_final_1
+    21300004: REINDEER_SPRITE_JUMP_final_2
+    21300006: REINDEER_SPRITE_JUMP_final_3
+    21300008: REINDEER_SPRITE_JUMP_final_4
+    21300010: REINDEER_SPRITE_JUMP_final_5
+    21300012: REINDEER_SPRITE_JUMP_final_6
+    21300014: REINDEER_SPRITE_JUMP_final_7
+    21300016: REINDEER_SPRITE_JUMP_final_8
+    21300018: REINDEER_SPRITE_JUMP_final_9
+    21300020: REINDEER_SPRITE_JUMP_final_10
+    21300022: REINDEER_SPRITE_JUMP_final_11
+    21300024: REINDEER_SPRITE_JUMP_final_12
+    21300026: REINDEER_SPRITE_JUMP_final_13
+    21300028: REINDEER_SPRITE_JUMP_final_14
+    21300030: REINDEER_SPRITE_JUMP_final_15
+    21300032: REINDEER_SPRITE_JUMP_final_16
+    21300034: REINDEER_SPRITE_JUMP_final_17
+    21300036: REINDEER_SPRITE_JUMP_final_18
+    21300038: REINDEER_SPRITE_JUMP_final_19
+    21300040: REINDEER_SPRITE_JUMP_final_20
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 382
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1910
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8c3cac0cdc249c46a5e7b758582ca27
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_1
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1910
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46a509c5cb3276c4fbb9f47e6e967d00
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_2
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 1910
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97cf2f560f6a0c84bbea9fdfc74df7b9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_3
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1910
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5dcceb852f71254280c047440234337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1528
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7347fe612ad899f44b2a5c2c381ebe16
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_5
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1528
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67787ee84012ccd4496e03d14c06d665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_6
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 1528
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ca7c23945f95e74a97aa0c3c60f48cf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_7
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1528
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0b4843b84f507e4fae65ac1cf0fd019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1146
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ceb4efe2c5de1347993eda5434c17b6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_9
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1146
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 764abc744cb83914ab07b2459ab30940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_10
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 1146
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6937bd9370b29b047998549116379afd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_11
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1146
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43cc3fe527722aa41af11fc88d74b650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 764
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81e204eea8eae524888bdf239567f8fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_13
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 764
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f696ee6940802b428af9a5de3d63b56
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_14
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 764
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1c382979a881e741a826b9b14670862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_15
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 764
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 300eee6f9379f464aa52d4c4c1c8ca6f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 382
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f25663db40d5ec46b98055a91a271e1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_17
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 382
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c0388be830a524f8c917be4f7c60df
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_18
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 382
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c64a6d48906a9ba49bb3b2ad4cb92c96
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_19
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 382
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8146cbdfac5ff54996e49234032a632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: REINDEER_SPRITE_JUMP_final_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 382
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c63f55f0facface4e850e74c35b00cd1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 058e7a487a2d6f74e9ab509cfeb41aad
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
