@@ -9,7 +9,14 @@ using System.Linq;
 
 public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
 {
-    private AudioImporter importer;
+#if UNITY_ANDROID
+    public MobileImporter audioImporter;
+#endif
+
+#if UNITY_STANDALONE_WIN
+    public NAudioImporter audioImporter;
+#endif 
+
     private AudioSource audioSource;
 
     //File browser prefab
@@ -38,8 +45,18 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
             Debug.LogError("Make sure there is a canvas GameObject present in the Hierarcy.");
         }
 
+        //Make sure game is unpaused
+        GameController.Instance.gamePaused = false;
+
         //Get components for audio importer and source
-        importer = GetComponent<AudioImporter>();
+#if UNITY_ANDROID
+        audioImporter = gameObject.AddComponent<MobileImporter>();
+#endif
+
+#if UNITY_STANDALONE_WIN
+        audioImporter = gameObject.AddComponent<NAudioImporter>();
+#endif
+
         audioSource = GetComponent<AudioSource>();
 
         //Default URLs
@@ -72,14 +89,6 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
 
         //Get list of file URLs
         fileURLs = PlayerPrefExtension.Instance.GetStringArray(playerPrefKey);
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            PlayerPrefs.DeleteKey(playerPrefKey);
-        }
     }
 
     /// <summary>
@@ -119,7 +128,7 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
     /// <param name="write">Boolean representation of write mode. Write=True, Read=False.</param>
     public void OpenFileBrowser(bool write = false)
     {
-        if(write)
+        if (write)
             OpenFileBrowser(FileBrowserMode.Write);
         else
             OpenFileBrowser(FileBrowserMode.Read);
@@ -160,7 +169,7 @@ public class MusicBrowser : SingletonMonoBehaviour<MusicBrowser>
 
             //Save URL to a list of songs
             //URLs should all be unique
-            if(!PlayerPrefExtension.Instance.ExistsWithinKey(playerPrefKey, path))
+            if (!PlayerPrefExtension.Instance.ExistsWithinKey(playerPrefKey, path))
             {
                 //Add new URL into list
                 List<string> urls = new List<string>();

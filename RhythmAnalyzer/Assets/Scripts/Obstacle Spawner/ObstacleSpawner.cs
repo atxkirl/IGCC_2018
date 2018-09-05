@@ -5,20 +5,27 @@ using EZObjectPools;
 
 public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
 {
-    public GameObject objectToSpawn;
+    //Both must have Projectile/Projectile-derived class and must have same speed
+    public GameObject sharkPrefab;
+    public GameObject birdPrefab;
+
     public GameObject audioController;
     public GameObject playerPosition;
     public float timeOffset;
+    public float minimumTimeBetweenSpawns;
 
     private AudioSource mutedSource;
     private AudioSource unmutedSource;
     private SpectrumAnalyzer spectrumAnalyzer;
-    private EZObjectPool objectPool;
+
+    private bool nthSpawn;
+    private bool played;
+    private float elapsedTime;
+    private float bounceTime;
 
     private void Start()
     {
         audioController = GameObject.Find("AudioController");
-        objectPool = EZObjectPool.CreateObjectPool(objectToSpawn, "ObstacleSpawner", 10, true, true, false);
 
         //Get audio sources from AudioController in scene
         mutedSource = audioController.GetComponent<AudioAnalyzer>().mutedAudioSource;
@@ -41,26 +48,47 @@ public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
         float distance = Vector3.Distance(transform.position, playerPosition.transform.position);
         //Now calculate time offset based on projectile speed and distance between
         //The time of the first beat must be slightly shorter because of lag
-        timeOffset = (distance / objectToSpawn.GetComponent<Projectile>().speed) + (time * 0.9f);
+        timeOffset = (distance / sharkPrefab.GetComponent<Projectile>().speed) + (time * 0.85f);
+
+        nthSpawn = false;
+        played = false;
     }
 
     private void Update()
     {
-        //TESTING WITH ENTER KEY
-        if (Input.GetKeyDown(KeyCode.Return) && !mutedSource.isPlaying)
+        if (!mutedSource.isPlaying && !played)
         {
             //Start audio playing
             StartAudio();
+            //Make sure it only plays audio once
+            played = true;
         }
 
         //Check if song is playing
         if (mutedSource.isPlaying)
         {
-            //Real-time checking through the entire processed list of samples
-            int index = audioController.GetComponent<AudioAnalyzer>().GetIndex(mutedSource.time) / 1024;
-            if (spectrumAnalyzer.spectralFluxSamples[index].isPeak)
+            //Update elapsedTime
+            elapsedTime += Time.deltaTime;
+
+            ////Real - time checking through the entire processed list of samples
+            //int index = audioController.GetComponent<AudioAnalyzer>().GetIndex(mutedSource.time) / 1024;
+            //if (index < spectrumAnalyzer.spectralFluxSamples.Count)
+            //{
+            //    if (spectrumAnalyzer.spectralFluxSamples[index].isPeak)
+            //    {
+            //        nthSpawn = !nthSpawn;
+            //        SpawnObstacle();
+            //    }
+            //}
+
+            //Real-time checking through the list of peak samples
+            foreach (SpectralFluxInfo sf in audioController.GetComponent<AudioAnalyzer>().peakInfo)
             {
-                SpawnObstacle();
+                if (sf.time <= (mutedSource.time + Time.deltaTime) && sf.time >= (mutedSource.time - Time.deltaTime))
+                {
+                    nthSpawn = !nthSpawn;
+                    SpawnObstacle();
+                }
             }
         }
     }
@@ -71,11 +99,33 @@ public class ObstacleSpawner : SingletonMonoBehaviour<ObstacleSpawner>
         audioController.GetComponent<AudioAnalyzer>().mutedAudioSource.Play();
         //Start unmuted track second to ensure beats co-incide with player's location
         audioController.GetComponent<AudioAnalyzer>().unmutedAudioSource.PlayDelayed(timeOffset);
+
+        //Tell GameController that game audio has started
+        GameController.Instance.currentAudioState = GameController.AudioState.PLAYING;
     }
 
     public void SpawnObstacle()
     {
-        GameObject spawnedObject;
-        objectPool.TryGetNextObject(transform.position, transform.rotation, out spawnedObject);
+        //Only spawn obstacles every alternate peak
+        if(nthSpawn && bounceTime < elapsedTime)
+        {
+            //Randomly select between shark (jump avoid) or bird (slide avoid)
+            int random = Random.Range(0, 10);
+            //Spawn shark
+            if (random < 6)
+            {
+                GameObject shark = Instantiate(sharkPrefab, transform);
+                Destroy(shark, 5f);
+            }
+            //Spawn birb
+            else
+            {
+                GameObject bird = Instantiate(birdPrefab, transform);
+                Destroy(bird, 5f);
+            }
+
+            //Update time
+            bounceTime = elapsedTime + minimumTimeBetweenSpawns;
+        }
     }
 }

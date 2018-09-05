@@ -29,9 +29,17 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
             _interactable = interactable;
         }
 
+        void Start()
+        {
+            StopAllCoroutines();
+        }
+
         // When single clicked, call FileClick method
         // When double clicked, call FileClick and SelectFile method
-        public void OnPointerClick(PointerEventData eventData) {
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Debug.Log("FileButton Click");
+
             if (_interactable) {
                 _clickCount++;
             }
@@ -44,8 +52,10 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
             StartCoroutine(ClickRoutine());
         }
 
-        private IEnumerator ClickRoutine() {
-            while (_clickCount != 0) {
+        private IEnumerator ClickRoutine()
+        {
+            while (_clickCount != 0)
+            {
                 yield return new WaitForEndOfFrame();
 
                 _currentTime += Time.deltaTime;
