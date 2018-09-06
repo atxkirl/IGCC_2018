@@ -47,7 +47,7 @@ public class ConfirmSong : UIButtonBase, IPointerClickHandler
             AudioAnalyzer.Instance.SetAudio(MusicPreview.Instance.audioSource.clip);
 
             //Go to loading screen
-            Debug.Log("Loading game");
+            //Debug.Log("Loading game");
             SceneController.Instance.LoadScene(sceneToLoad);
         }
     }

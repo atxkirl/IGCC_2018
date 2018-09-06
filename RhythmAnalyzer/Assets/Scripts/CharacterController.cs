@@ -75,7 +75,6 @@ public class CharacterController : MonoBehaviour
 				List<Vector3> points = new List<Vector3>();
 
 				GameObject.FindGameObjectsWithTag("Floor")[i].GetComponent<MeshFilter>().mesh.GetVertices(points);
-				Debug.Log(points);
 				int kev1 = 0;
 				int kev2 = 0;
 				//float length = GameObject.FindGameObjectsWithTag("Floor")[i].GetComponent<MeshFilter>().mesh.bounds.size.x;
@@ -85,13 +84,12 @@ public class CharacterController : MonoBehaviour
 
 					float X = (GameObject.FindGameObjectsWithTag("Floor")[i].transform.position.x - (length / 2)) + ((length / points.Count) * j);
 					//Debug.Log(X);
-					if (X >= transform.position.x - 0.2
-						&& X <= transform.position.x + 0.2 && points[j].y > 0)
+					if (X >= transform.position.x - 0.2 && X <= transform.position.x + 0.2 && points[j].y > 0)
 					{
 						initialHeight = points[j].y + 2;// + (GameObject.FindGameObjectsWithTag("Floor")[i].GetComponent<MeshFilter>().mesh.bounds.size.y/ 2);
 						check = true;
 						timer2 = 0f;
-						Debug.Log(initialHeight);
+						//Debug.Log(initialHeight);
 						if (initialHeight < 5)
 						{
 
@@ -99,7 +97,7 @@ public class CharacterController : MonoBehaviour
 						//target.y += initialHeight - transform.position.y;
 						if (!jump && !fall)
 						{
-							transform.localPosition = new Vector3(transform.position.x, initialHeight, transform.position.z);
+							//transform.localPosition = new Vector3(transform.position.x, initialHeight, transform.position.z);
 						}
 						break;
 

@@ -125,7 +125,7 @@ public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
                 }
             }
 
-            Debug.Log("Channel combining done. Total number of samples processed: " + processedSamples.Length);
+            //Debug.Log("Channel combining done. Total number of samples processed: " + processedSamples.Length);
 
             //Execute Fast-Fourier Transform to return the spectrum data over time
             int spectrumSampleSize = 1024;
@@ -157,7 +157,7 @@ public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
                 spectrumAnalyzer.AnalyzeSpectrum(System.Array.ConvertAll(scaledFFTSpectrum, x => (float)x), currSongtime);
             }
 
-            Debug.Log("Spectrum Analysis completed, now getting all Peak data samples.");
+            //Debug.Log("Spectrum Analysis completed, now getting all Peak data samples.");
             for (float i = 0f; i <= clipLength; i += 0.0167f)
             {
                 //Get the index from the audio time
@@ -176,7 +176,7 @@ public class AudioAnalyzer : SingletonMonoBehaviour<AudioAnalyzer>
                 }
             }
 
-            Debug.Log("Spectrum Analysis and Peak Sampling done. Thread completed.");
+            //Debug.Log("Spectrum Analysis and Peak Sampling done. Thread completed.");
             peakInfoSize = peakInfo.Count;
             isDone = true;
         }

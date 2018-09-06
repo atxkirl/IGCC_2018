@@ -32,7 +32,8 @@ public class GameController : SingletonMonoBehaviour<GameController>
 
     private void Update()
     {
-		audioController.GetComponent<AudioAnalyzer>().unmutedAudioSource.volume = volumeSlider.GetComponent<Slider>().value;
+		if(volumeSlider != null)
+            audioController.GetComponent<AudioAnalyzer>().unmutedAudioSource.volume = volumeSlider.GetComponent<Slider>().value;
 
         //Audio paused
         if (gamePaused)
