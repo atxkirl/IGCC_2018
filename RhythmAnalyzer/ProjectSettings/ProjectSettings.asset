@@ -152,6 +152,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.IGCC2018.SoundSurfer
+    Standalone: com.IGCC2018.SoundSurfer
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16

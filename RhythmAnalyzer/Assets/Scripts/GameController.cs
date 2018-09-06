@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : SingletonMonoBehaviour<GameController>
 {
@@ -13,7 +14,8 @@ public class GameController : SingletonMonoBehaviour<GameController>
     }
 
     public AudioState currentAudioState;
-    public GameObject audioController;
+	public GameObject audioController;
+	public GameObject volumeSlider;
     public bool gamePaused;
 
     public GameObject gameoverScreen;
@@ -30,6 +32,8 @@ public class GameController : SingletonMonoBehaviour<GameController>
 
     private void Update()
     {
+		audioController.GetComponent<AudioAnalyzer>().unmutedAudioSource.volume = volumeSlider.GetComponent<Slider>().value;
+
         //Audio paused
         if (gamePaused)
         {

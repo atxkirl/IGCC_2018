@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: 50379094891005860}
   - component: {fileID: 61059128270480198}
   - component: {fileID: 114604832976560104}
+  - component: {fileID: 95151597535362204}
+  - component: {fileID: 114648222575240698}
+  - component: {fileID: 114166104749409618}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -88,6 +91,40 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7225131, y: 0.8062827}
   m_EdgeRadius: 0
+--- !u!95 &95151597535362204
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820918535726358}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d3280369f4d89c9449834e4a13cf477c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114166104749409618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820918535726358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92619bcc3394b8444bdd941e6d2feed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tapController: {fileID: 114648222575240698}
+  speed: 10
+  slideTimer: 0.2
+  jumpHeight: 10
+  animator: {fileID: 95151597535362204}
 --- !u!114 &114604832976560104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,6 +138,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
+  isDead: 0
+--- !u!114 &114648222575240698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820918535726358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb037844f7f0d8240b76ff5cc805936d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTapTimeThreshold: 0.5
+  finalizedTapWipeTimeThreshold: 0
 --- !u!212 &212061779589974034
 SpriteRenderer:
   m_ObjectHideFlags: 1

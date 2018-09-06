@@ -12,8 +12,8 @@ public class CharacterController : MonoBehaviour
     private float slideTimer;
     [SerializeField]
     private float jumpHeight;
-    [SerializeField]
-    GameObject line;
+    //[SerializeField]
+    //GameObject line;
     [SerializeField]
     Animator animator;
 
@@ -23,8 +23,9 @@ public class CharacterController : MonoBehaviour
     private bool jump;
     private bool fall;
     private bool slide;
-    private float initialHeight;
+    public float initialHeight;
     private float timer;
+	private float timer2;
     // Use this for initialization
     void Start()
     {
@@ -34,19 +35,93 @@ public class CharacterController : MonoBehaviour
         fall = false;
         slide = false;
         timer = 0;
-        lineRenderer = line.GetComponent<LineRenderer>();
+		timer2 = 0;
+		//lineRenderer = line.GetComponent<LineRenderer>();
 
-    }
+	}
 
     // Update is called once per frame
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("idle") && !jump)
+		//RaycastHit hit;
+		//Ray ray = new Ray(new Vector3(transform.position.x, 5, transform.position.z + 3), Vector3.back);
+		//for(float i =5; i<40; i++)
+		//{
+		//	ray = new Ray(new Vector3(transform.position.x, i, transform.position.z + 3), Vector3.back);
+		//	if (!Physics.Raycast(ray, out hit) || hit.distance > 3)
+		//	{
+		//		initialHeight = i + 2;
+		//		transform.localPosition = new Vector3(transform.position.x, initialHeight, transform.position.z);
+		//		Debug.Log("sadsda");
+		//		break;
+		//	}
+		//}
+		//if (Physics.Raycast(ray, out hit))
+		//{
+		//	initialHeight = 50 - hit.distance;
+		//	//transform.localPosition = new Vector3(transform.position.x, initialHeight, transform.position.z);
+		//	Debug.Log("sadsda");
+		//}
+		//timer2 += Time.deltaTime;
+		//if (timer2 > 0.1)
+		//{
+		for (int i = 0; i < GameObject.FindGameObjectsWithTag("Floor").Length; i++)
+		{
+			float length = GameObject.FindGameObjectsWithTag("Floor")[i].GetComponent<MeshFilter>().mesh.bounds.size.x;
+			if (GameObject.FindGameObjectsWithTag("Floor")[i].transform.position.x - transform.position.x >= -(length / 2)
+				&& GameObject.FindGameObjectsWithTag("Floor")[i].transform.position.x - transform.position.x <= (length / 2))
+			{
+				bool check = false;
+				List<Vector3> points = new List<Vector3>();
+
+				GameObject.FindGameObjectsWithTag("Floor")[i].GetComponent<MeshFilter>().mesh.GetVertices(points);
+				Debug.Log(points);
+				int kev1 = 0;
+				int kev2 = 0;
+				//float length = GameObject.FindGameObjectsWithTag("Floor")[i].GetComponent<MeshFilter>().mesh.bounds.size.x;
+				float some = length - ((GameObject.FindGameObjectsWithTag("Floor")[i].transform.position.x - transform.position.x)) / (length / points.Count);
+				for (int j = (int)some; j < points.Count; j++)
+				{
+
+					float X = (GameObject.FindGameObjectsWithTag("Floor")[i].transform.position.x - (length / 2)) + ((length / points.Count) * j);
+					//Debug.Log(X);
+					if (X >= transform.position.x - 0.2
+						&& X <= transform.position.x + 0.2 && points[j].y > 0)
+					{
+						initialHeight = points[j].y + 2;// + (GameObject.FindGameObjectsWithTag("Floor")[i].GetComponent<MeshFilter>().mesh.bounds.size.y/ 2);
+						check = true;
+						timer2 = 0f;
+						Debug.Log(initialHeight);
+						if (initialHeight < 5)
+						{
+
+						}
+						//target.y += initialHeight - transform.position.y;
+						if (!jump && !fall)
+						{
+							transform.localPosition = new Vector3(transform.position.x, initialHeight, transform.position.z);
+						}
+						break;
+
+					}
+
+				}
+				points.Clear();
+				if (check)
+				{
+					break;
+				}
+			}
+
+		}
+		//}
+		if (animator.GetCurrentAnimatorStateInfo(0).IsTag("idle") && !jump)
         {
             transform.GetChild(0).gameObject.SetActive(true);
         }
         if(jump || fall)
         {
+			Debug.Log("hello");
             transform.localScale = new Vector3(6, 6, 1);
         }
         else
@@ -54,27 +129,17 @@ public class CharacterController : MonoBehaviour
             transform.localScale = new Vector3(5, 5, 1);
         }
 
-        //ArduinoSerialMsgReader.Instance.onAccelerometerMsgRecieved += Test;
-        Vector3[] linePoints = new Vector3[lineRenderer.positionCount];
-        lineRenderer.GetPositions(linePoints);
-        for (int i = 0; i < lineRenderer.positionCount; i++)
-        {
-            if (linePoints[i].x >= transform.position.x - 0.5
-                && linePoints[i].x <= transform.position.x + 0.5)
-            {
-                initialHeight = linePoints[i].y + 2;
-            }
-        }
         if(Input.GetKeyUp(KeyCode.Space))
         {
             //animator.SetBool("Change", !animator.GetBool("Change"));
         }
         if (!jump && !fall)
         {
-            Vector3 temp = new Vector3();
-            temp.Set(transform.position.x, initialHeight, transform.position.z);
-            transform.position = temp;
-        }
+			//Vector3 temp = new Vector3();
+			//temp.Set(transform.position.x, initialHeight, transform.position.z);
+			//transform.position = temp;
+			//transform.localPosition = new Vector3(transform.position.x, initialHeight, transform.position.z);
+		}
         target.Set(0, 0, 0);
         if (Test.Instance.tap)
         {

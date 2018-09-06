@@ -233,7 +233,8 @@ public class CurveGenerator : MonoBehaviour
         floor.AddComponent<MeshRenderer>();
         floor.AddComponent<MeshFilter>();
         floor.AddComponent<MeshCollider>();
-        floor.GetComponent<MeshFilter>().mesh = CreatePlaneMesh();
+		floor.AddComponent<floor>();
+		floor.GetComponent<MeshFilter>().mesh = CreatePlaneMesh();
         floor.GetComponent<MeshFilter>().mesh.SetVertices(vertexList);
         floor.GetComponent<MeshRenderer>().material = floorMaterial;
         floor.GetComponent<MeshCollider>().sharedMesh = floor.GetComponent<MeshFilter>().mesh;
@@ -314,18 +315,21 @@ public class CurveGenerator : MonoBehaviour
 
             //Generate new wave
             GameObject floor = new GameObject("floor");
+			floor.tag = "Floor";
             floor.AddComponent<MeshRenderer>();
             floor.AddComponent<MeshFilter>();
-            floor.AddComponent<MeshCollider>();
-            floor.AddComponent<MoveWave>();
+			floor.AddComponent<floor>();
+			floor.AddComponent<MeshCollider>();
+			floor.AddComponent<MoveWave>();
             floor.GetComponent<MoveWave>().waveSpeed = waveSpeed;
             floor.GetComponent<MoveWave>().vanishingPoint = new Vector3(topLeft.x - screenXlength / 2, 0, 0);
             floor.GetComponent<MeshFilter>().mesh = CreatePlaneMesh();
             floor.GetComponent<MeshFilter>().mesh.SetVertices(vertexList);
             floor.GetComponent<MeshRenderer>().material = floorMaterial;
-            floor.GetComponent<MeshCollider>().sharedMesh = floor.GetComponent<MeshFilter>().mesh;
+			//floor.GetComponent<MeshCollider>().convex = true;
+			floor.GetComponent<MeshCollider>().sharedMesh = floor.GetComponent<MeshFilter>().mesh;
 
-            if (previousFrameGameObject == null)
+			if (previousFrameGameObject == null)
             {
                 floor.transform.position = new Vector3(topLeft.x + screenXlength / 2, 0, 0);
             }
