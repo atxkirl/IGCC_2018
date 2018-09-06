@@ -195,6 +195,10 @@ public class CurveGenerator : MonoBehaviour
     public Camera mainCamera;
     public Material floorMaterial;
 
+    public GameObject[] floorDecoPrefabs;
+    public float floorDecoVerticalLevelGuide = 0f;
+    public int floorDecoDensity = 4;
+
     public int lineResolution;
     public float waveTop = 0.0f;
     public float waveBottom = -4.0f;
@@ -340,9 +344,22 @@ public class CurveGenerator : MonoBehaviour
                 floor.transform.position = new Vector3(p.x + screenXlength - waveSpeed * 2, 0, 0);
             }
 
+            CreateAndAddFloorDecos(floor.transform, floorDecoVerticalLevelGuide, floor.GetComponent<MeshCollider>().bounds.size.x);
             previousFrameGameObject = floor;
         }
     }
+
+    private void CreateAndAddFloorDecos(Transform floor, float floorDecoVerticalLevel, float floorHorizontalWidth)
+    {
+        for (int p = 0; p < floorDecoDensity; p++)
+        {
+            GameObject deco = Instantiate(floorDecoPrefabs[Random.Range(0, floorDecoPrefabs.Length)]);
+            deco.transform.SetParent(floor);
+            float decoXPos = (floorHorizontalWidth / (floorDecoDensity + 1)) / 2 + (floorHorizontalWidth / floorDecoDensity * p);
+            deco.transform.localPosition = new Vector3(decoXPos, floorDecoVerticalLevel, 0f);
+        }
+    }
+
 
     private Mesh CreatePlaneMesh()
     {

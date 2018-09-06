@@ -920,6 +920,11 @@ MonoBehaviour:
   audioController: {fileID: 0}
   mainCamera: {fileID: 282840813}
   floorMaterial: {fileID: 2100000, guid: bbe25d0604f985843a9a85a56a24c7a1, type: 2}
+  floorDecoPrefabs:
+  - {fileID: 1134002919968776, guid: fb7511965b3510043be2c403eacbd592, type: 2}
+  - {fileID: 1715809889235726, guid: 957ddb6d28bd90e49b90dcc195a49fcc, type: 2}
+  floorDecoDensity: 4
+  floorDecoVerticalLevelGuide: 0
   lineResolution: 50
   waveTop: 5
   waveBottom: -4
